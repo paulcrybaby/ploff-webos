@@ -1984,7 +1984,7 @@
         previewEffectiveSubtitleStyle(null);
         playbackController.startItem(target, {
           detail: request.detail,
-          startOffset: request.resumeOffset || null,
+          startOffset: request.resume === false ? 0 : request.resumeOffset || null,
           preferences: detailPlaybackPreferencesFor(request.detail, null),
           versionAffinity: null
         }, function (error) { if (error) { handlePlaybackQueueError(error); } });

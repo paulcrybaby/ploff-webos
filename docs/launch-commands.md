@@ -57,8 +57,13 @@ The device pairing and server configuration are outside this protocol.
 For `item`, the ID must resolve to a movie, episode, or clip. For the other types,
 use the playlist or collection ID, not a leaf's ID. Containers reuse the existing
 bounded queue and its starting-item/Up Next behavior; `resume` controls the
-selected leaf's starting position. This does not add shuffle, arbitrary start
-indices, name search, audio playback, pause/seek commands, or a casting protocol.
+initially selected leaf's starting position. After that video ends, Up Next
+always starts the next item from zero, even if Plex has a saved position.
+An explicit zero is passed to the decoder; it must not fall back to the saved
+position. For continuous shuffled playback, a controller can pass the ID of
+a normal Plex playlist whose items are already shuffled. This does not add
+client-side shuffle, arbitrary start indices, name search, audio playback,
+pause/seek commands, or a casting protocol.
 
 Unknown fields inside `ploff`, URL/path IDs, tokens, unsupported types, malformed
 JSON, fractional IDs and unsafe numeric IDs are rejected. String launch
